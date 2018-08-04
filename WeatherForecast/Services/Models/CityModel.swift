@@ -19,9 +19,10 @@ struct CitysList : Codable {
      var coord: [Coordinates]
     
 }
-ВСЕ? гит игнор
 
 struct Coordinates: Codable {
     var lon: Double
     var lat: Double
 }
+
+

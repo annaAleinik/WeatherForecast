@@ -21,12 +21,14 @@ struct City: Codable {
     let name: String
     let coord: Coord
     let country: String
-    let population: Int
+//    let population: Int
 }
 
 struct Coord: Codable {
     let lat, lon: Double
 }
+
+
 
 struct List: Codable {
     let dt: Int

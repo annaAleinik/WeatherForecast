@@ -11,19 +11,6 @@ import CoreLocation
 
 class HomeVC: UIViewController,  CLLocationManagerDelegate {
     
-    //MARK: -- Outlets
-    
-    @IBOutlet weak var cityNameLabel: UILabel!
-    @IBOutlet weak var dateLable: UILabel!
-    @IBOutlet weak var degreesLabel: UILabel!
-    @IBOutlet weak var humidityLabel: UILabel!
-    @IBOutlet weak var windSpeedLabel: UILabel!
-    
-    @IBOutlet weak var mainImage: UIImageView!
-    @IBOutlet weak var degreesImg: UIImageView!
-    @IBOutlet weak var humidityImg: UIImageView!
-    @IBOutlet weak var windSpeedImg: UIImageView!
-    
     //MARK: -- Properties
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation!
@@ -47,7 +34,7 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate {
             locationManager.startUpdatingLocation()
             self.startLat = locationManager.location?.coordinate.latitude.description
             self.startLot = locationManager.location?.coordinate.longitude.description
-}
+        }
         
     }
     
@@ -58,17 +45,16 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate {
         let lat = manager.location?.coordinate.latitude.description
         guard let latitude = lat else {return}
         guard let longitude = lon else {return}
+        self.startLot = longitude
+        self.startLat = latitude
         
         NetWorkManager.sharedInstance.getForecast(lat: latitude, lon: longitude) { (weather, error) in
-            self.cityNameLabel.text = weather?.city.name
+            
         }
 
     }
     
 }
 
-    
-
-   
 
 
