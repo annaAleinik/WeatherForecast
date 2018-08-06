@@ -11,5 +11,7 @@ import Foundation
 
 enum APIConst {
     static let baseURL = "http://api.openweathermap.org/data/2.5/"
-   
+  static let baseURLImg = "http://openweathermap.org/img/w/"
+    static let formatImg = ".png"
+
 }

@@ -38,10 +38,46 @@ class NetWorkManager {
         }
     }
     
+    // Get imges
+    
+//    func  getimage(imgCode: String, completion : @escaping (Welcome?, Error?) -> Void) {
+//        
+//        let url = "http://openweathermap.org/img/w/\(imgCode).png"
+//        
+//        
+//        Alamofire.request(url, method: HTTPMethod.get , parameters: nil).responseJSON { (response) in
+//            switch response.result {
+//            case .success(_ ):
+//                do {
+//                    let img = try JSONDecoder().decode(Welcome.self, from: response.data!)
+//                    completion(img, nil)
+//                }catch let error{
+//                    print(error)
+//                }
+//            case .failure(let error):
+//                print(error)
+//                completion(nil, error)
+//                
+//            }
+//        }
+//    }
+    
+    
+    
+    
 }
 
 
 
+
+
+
+
+
+
+
+
+//pars from bundel example
 //func loadJson(filename fileName: String) -> [Person]? {
 //    if let url = Bundle.main.url(forResource: fileName, withExtension: "json") {
 //        do {
