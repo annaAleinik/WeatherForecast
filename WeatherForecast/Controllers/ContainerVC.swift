@@ -24,12 +24,19 @@ class ContainerVC: UIViewController {
     @IBOutlet weak var humidityImg: UIImageView!
     @IBOutlet weak var windSpeedImg: UIImageView!
 
-   
+    var selectedDay: Welcome? = nil {
+        didSet{
+            self.cityNameLabel.text = ""
+        }
+    }
+
+    
     //MAEK: -- Life cyrcle
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
+    
 }
 

@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="390"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
-                                    <segue destination="Y9c-h8-AK0" kind="embed" id="rxq-lx-IzN"/>
+                                    <segue destination="Y9c-h8-AK0" kind="embed" identifier="LoadConteiner" id="rxq-lx-IzN"/>
                                 </connections>
                             </containerView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3NA-3a-7IT">
@@ -220,6 +220,7 @@
                             <constraint firstItem="fwa-Qg-Qua" firstAttribute="leading" secondItem="ksh-jo-g46" secondAttribute="leading" id="fEV-gY-F4e"/>
                             <constraint firstItem="8mI-eY-NQt" firstAttribute="top" secondItem="ksh-jo-g46" secondAttribute="top" id="tFu-3g-Xxc"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="iHP-cz-5NU"/>
                     </view>
                     <connections>
                         <outlet property="cityNameLabel" destination="dHI-Fv-Dna" id="bYx-8Q-CNV"/>
