@@ -66,10 +66,10 @@
             </objects>
             <point key="canvasLocation" x="-96" y="924"/>
         </scene>
-        <!--View Controller-->
+        <!--SearchVC-->
         <scene sceneID="YxX-ci-fm2">
             <objects>
-                <viewController id="eVc-hb-Zfd" customClass="ViewController" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eVc-hb-Zfd" customClass="SearchVC" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LsF-it-wOv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
