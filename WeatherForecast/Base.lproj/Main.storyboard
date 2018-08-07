@@ -51,69 +51,56 @@
             <point key="canvasLocation" x="61.600000000000001" y="110.19490254872565"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="Md0-gN-qKk">
+        <scene sceneID="tdf-Ps-pWZ">
             <objects>
-                <navigationController id="3cB-jR-9m9" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ofT-Ov-q5Z">
+                <navigationController id="ygY-mA-GHH" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gvF-rr-6ze">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="X6j-Es-dFA" kind="relationship" relationship="rootViewController" id="Egc-bD-55y"/>
+                        <segue destination="eVc-hb-Zfd" kind="relationship" relationship="rootViewController" id="L2e-y2-K9f"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fTT-lV-cGn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SMh-C9-XhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-649" y="776"/>
+            <point key="canvasLocation" x="-96" y="924"/>
         </scene>
         <!--SearchVC-->
-        <scene sceneID="IR1-ze-L6e">
+        <scene sceneID="YxX-ci-fm2">
             <objects>
-                <viewController id="X6j-Es-dFA" customClass="SearchVC" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="sQB-cM-iKm">
+                <viewController id="eVc-hb-Zfd" customClass="SearchVC" customModule="WeatherForecast" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LsF-it-wOv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="lH1-oa-zWe">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="t2U-8S-EDh">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="lH1-oa-zWe" secondAttribute="height" multiplier="125:201" id="iWk-6A-d3A"/>
-                                </constraints>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lH1-oa-zWe" firstAttribute="bottom" secondItem="SdK-hw-lfb" secondAttribute="bottom" id="3O5-tF-Vu2"/>
-                            <constraint firstItem="lH1-oa-zWe" firstAttribute="trailing" secondItem="SdK-hw-lfb" secondAttribute="trailing" id="RBZ-Jp-93X"/>
-                            <constraint firstItem="lH1-oa-zWe" firstAttribute="top" secondItem="SdK-hw-lfb" secondAttribute="top" id="Uru-ug-7tD"/>
-                            <constraint firstItem="lH1-oa-zWe" firstAttribute="leading" secondItem="SdK-hw-lfb" secondAttribute="leading" id="bXe-yl-bah"/>
+                            <constraint firstItem="fGj-zs-Yd3" firstAttribute="trailing" secondItem="t2U-8S-EDh" secondAttribute="trailing" id="QHM-OO-oGf"/>
+                            <constraint firstItem="t2U-8S-EDh" firstAttribute="leading" secondItem="fGj-zs-Yd3" secondAttribute="leading" id="UTO-eE-qeF"/>
+                            <constraint firstItem="fGj-zs-Yd3" firstAttribute="bottom" secondItem="t2U-8S-EDh" secondAttribute="bottom" id="k1v-xH-7FY"/>
+                            <constraint firstItem="t2U-8S-EDh" firstAttribute="top" secondItem="fGj-zs-Yd3" secondAttribute="top" id="nDg-Bh-bvz"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="SdK-hw-lfb"/>
+                        <viewLayoutGuide key="safeArea" id="fGj-zs-Yd3"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ODI-tX-ssl">
-                        <nil key="title"/>
-                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="center" minimumFontSize="17" clearButtonMode="always" id="Yyl-rq-6Dh">
-                            <rect key="frame" x="23" y="7" width="300" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </textField>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="l3F-VK-dQ1">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="C5m-Vk-vq9">
-                                <rect key="frame" x="329" y="7" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </button>
+                    <navigationItem key="navigationItem" id="r9y-8l-45j">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="hzS-3W-kpo">
+                            <connections>
+                                <action selector="showSearchBarWithSender:" destination="eVc-hb-Zfd" id="veM-b4-x7n"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchButton" destination="C5m-Vk-vq9" id="HGu-jC-j2z"/>
-                        <outlet property="searchTextField" destination="Yyl-rq-6Dh" id="KJ8-pT-abN"/>
+                        <outlet property="mapView" destination="t2U-8S-EDh" id="SqI-at-mKf"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c0g-Hl-GGs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B9W-9A-Odu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="37.600000000000001" y="775.86206896551732"/>
+            <point key="canvasLocation" x="636" y="923"/>
         </scene>
         <!--ContainerVC-->
         <scene sceneID="NAX-Rk-gmS">

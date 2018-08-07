@@ -21,13 +21,11 @@ struct City: Codable {
     let name: String
     let coord: Coord
     let country: String
-//    let population: Int
 }
 
 struct Coord: Codable {
     let lat, lon: Double
 }
-
 
 
 struct List: Codable {
@@ -45,6 +43,7 @@ struct List: Codable {
         case dtTxt = "dt_txt"
         case rain
     }
+    
 }
 
 struct Clouds: Codable {
@@ -89,17 +88,10 @@ enum Pod: String, Codable {
 struct Weather: Codable {
     let id: Int
     let main: MainEnum
-    let description: Description
+    let description: String
     let icon: String
 }
 
-enum Description: String, Codable {
-    case brokenClouds = "broken clouds"
-    case clearSky = "clear sky"
-    case fewClouds = "few clouds"
-    case lightRain = "light rain"
-    case scatteredClouds = "scattered clouds"
-}
 
 enum MainEnum: String, Codable {
     case clear = "Clear"
