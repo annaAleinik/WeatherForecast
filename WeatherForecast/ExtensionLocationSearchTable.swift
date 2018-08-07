@@ -32,9 +32,6 @@ extension LocationSearchTable : UISearchResultsUpdating {
     
 }
 
-
-
-
 extension LocationSearchTable {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

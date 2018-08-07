@@ -78,17 +78,18 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
             let mainImgLink = APIConst.baseURLImg + mainIcon! + APIConst.formatImg
             self.container?.mainImage.downloadedFrom(link: mainImgLink)
             
+            var arrayDate = [String]()
             for dt in self.arrForecast{
                 for listObj in dt.list {
                     let interval = TimeInterval(listObj.dt)
-                    let date = NSDate(timeIntervalSinceReferenceDate: interval)
+                    let date = NSDate(timeIntervalSince1970: interval)
                     let currentDateString: String = self.dateFormatter.string(from: date as Date)
-                    self.arrDate.append(currentDateString)
+                    arrayDate.append(currentDateString)
                     
                 }
             }
-
-            }
+            self.arrDate = arrayDate.removeDuplicates()
+        }
     }
 
     
@@ -104,20 +105,13 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return self.arrDate.count
     }
     
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-        
-//        let tempMax = self.arrForecast[indexPath.row].list[indexPath.row].main.tempMax
-//        let tempMin = self.arrForecast[indexPath.row].list[indexPath.row].main.tempMin
-//        let max = String(format:"%.1f", tempMax)
-//        let min = String(format:"%.1f", tempMin)
-//
-//        cell.tempLabel.text = "\(max)/\(min)"
-        
+        cell.dtLabel.text = self.arrDate[indexPath.row]
         return cell
     }
     
