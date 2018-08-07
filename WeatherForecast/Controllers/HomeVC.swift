@@ -22,6 +22,9 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
     var arrForecast = [Welcome]()
     var arrDate = [String]()
     
+    let date = Date()
+    let dateFormatter = DateFormatter()
+
     //MAEK: -- Life cyrcle
     
     override func viewDidLoad() {
@@ -29,7 +32,7 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
         tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "TableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
-
+        dateFormatter.dateFormat = "EEEE"
         self.setUp()
     }
     
@@ -74,9 +77,20 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
             let mainIcon = weatherData?.first?.list.first?.weather.first?.icon
             let mainImgLink = APIConst.baseURLImg + mainIcon! + APIConst.formatImg
             self.container?.mainImage.downloadedFrom(link: mainImgLink)
-           
+            
+            for dt in self.arrForecast{
+                for listObj in dt.list {
+                    let interval = TimeInterval(listObj.dt)
+                    let date = NSDate(timeIntervalSinceReferenceDate: interval)
+                    let currentDateString: String = self.dateFormatter.string(from: date as Date)
+                    self.arrDate.append(currentDateString)
+                    
+                }
+            }
+
+            }
     }
-}
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "LoadConteiner") {
@@ -97,12 +111,12 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
         
-        let tempMax = self.arrForecast[indexPath.row].list[indexPath.row].main.tempMax
-        let tempMin = self.arrForecast[indexPath.row].list[indexPath.row].main.tempMin
-        let max = String(format:"%.1f", tempMax)
-        let min = String(format:"%.1f", tempMin)
-        
-        cell.tempLabel.text = "\(max)/\(min)"
+//        let tempMax = self.arrForecast[indexPath.row].list[indexPath.row].main.tempMax
+//        let tempMin = self.arrForecast[indexPath.row].list[indexPath.row].main.tempMin
+//        let max = String(format:"%.1f", tempMax)
+//        let min = String(format:"%.1f", tempMin)
+//
+//        cell.tempLabel.text = "\(max)/\(min)"
         
         return cell
     }
