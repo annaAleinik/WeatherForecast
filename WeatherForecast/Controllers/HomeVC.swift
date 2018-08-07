@@ -19,11 +19,14 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
     var startLot: String?
     var container: ContainerVC?
     
+    var arrForecast = [Welcome]()
+    
     //MAEK: -- Life cyrcle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
+        tableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "TableViewCell")
+        
         self.setUp()
     }
     
@@ -46,20 +49,32 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
         let latitude = String(lat)
         
         NetWorkManager.sharedInstance.getForecast(lat: latitude, lon: longitude) { (weatherData, error) in
-            self.container?.cityNameLabel.text = weatherData?.city.name
-            self.container?.dateLable.text = weatherData?.list.first?.dtTxt
+            
+            guard error == nil else {
+                print(error?.localizedDescription)
+                return
+            }
+            if let array = weatherData {
+                self.arrForecast = array
+                self.tableView.reloadData()
+            }
+            self.container?.cityNameLabel.text = weatherData?.first?.city.name
+            self.container?.dateLable.text = weatherData?.first?.list.first?.dtTxt
 
             
-            guard let humidity = weatherData?.list.first?.main.humidity else {return}
-            guard let windSpeed = weatherData?.list.first?.wind.speed else {return}
+            guard let humidity = weatherData?.first?.list.first?.main.humidity else {return}
+            guard let windSpeed = weatherData?.first?.list.first?.wind.speed else {return}
             self.container?.humidityLabel.text = String(describing: humidity)
             self.container?.windSpeedLabel.text = String(describing: windSpeed)
             
-            let mainIcon = weatherData?.list.first?.weather.first?.icon            
+            let mainIcon = weatherData?.first?.list.first?.weather.first?.icon
             let mainImgLink = APIConst.baseURLImg + mainIcon! + APIConst.formatImg
             self.container?.mainImage.downloadedFrom(link: mainImgLink)
            
     }
+        tableView.delegate = self
+        tableView.dataSource = self
+
 }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -71,13 +86,22 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
     
     
     //MARK: --UITableViewDataSource
-    
+
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return (self.arrForecast.first?.list.count)!
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath)
+    
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
+        
+        let tempMax = self.arrForecast[indexPath.row].list[indexPath.row].main.tempMax
+        let tempMin = self.arrForecast[indexPath.row].list[indexPath.row].main.tempMin
+        let max = String(format:"%.1f", tempMax)
+        let min = String(format:"%.1f", tempMin)
+        
+        cell.tempLabel.text = "\(max)/\(min)"
         
         return cell
     }
