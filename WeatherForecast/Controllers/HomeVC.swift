@@ -71,8 +71,17 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
             
             guard let humidity = weatherData?.first?.list.first?.main.humidity else {return}
             guard let windSpeed = weatherData?.first?.list.first?.wind.speed else {return}
-            self.container?.humidityLabel.text = String(describing: humidity)
-            self.container?.windSpeedLabel.text = String(describing: windSpeed)
+            guard let tempMax = weatherData?.first?.list.first?.main.tempMax else {return}
+            guard let tempMin = weatherData?.first?.list.first?.main.tempMin else {return}
+            
+            let strTempMax = String(describing: tempMax)
+            let strTempMin = String(describing: tempMin)
+            let strHumidity = String(describing: humidity)
+            let strWindSpeed = String(describing: windSpeed)
+
+            self.container?.humidityLabel.text = "\(strHumidity)%"
+            self.container?.windSpeedLabel.text = "\(strWindSpeed)m/sec"
+            self.container?.degreesLabel.text = "\(strTempMax)/\(strTempMin)"
             
             let mainIcon = weatherData?.first?.list.first?.weather.first?.icon
             let mainImgLink = APIConst.baseURLImg + mainIcon! + APIConst.formatImg
