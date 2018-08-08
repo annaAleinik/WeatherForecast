@@ -33,15 +33,26 @@ class SearchVC: UIViewController {
         resultSearchController = UISearchController(searchResultsController: locationSearchTable)
         resultSearchController.searchResultsUpdater = locationSearchTable as UISearchResultsUpdating
         let searchBar = resultSearchController!.searchBar
-        searchBar.sizeToFit()
+//        searchBar.sizeToFit()
         searchBar.placeholder = "Search for places"
         navigationItem.titleView = resultSearchController?.searchBar
+//
+        let backButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(SearchVC.doneAction))
+        
+
+
+        navigationItem.leftBarButtonItem = backButton
+        
         resultSearchController.hidesNavigationBarDuringPresentation = false
         resultSearchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
         locationSearchTable.mapView = mapView
         locationSearchTable.handleMapSearchDelegate = self
         
+    }
+    
+    @objc func doneAction() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func getDirections(){

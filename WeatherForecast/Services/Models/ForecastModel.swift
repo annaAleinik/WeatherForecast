@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Welcome: Codable {
+struct WeatherData: Codable {
     let cod: String
     let message: Double
     let cnt: Int

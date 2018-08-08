@@ -24,7 +24,7 @@ class ContainerVC: UIViewController {
     @IBOutlet weak var humidityImg: UIImageView!
     @IBOutlet weak var windSpeedImg: UIImageView!
 
-    var selectedDay: Welcome? = nil {
+    var selectedDay: WeatherData? = nil {
         didSet{
             self.cityNameLabel.text = ""
         }

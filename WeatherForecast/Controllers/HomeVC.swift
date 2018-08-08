@@ -19,7 +19,7 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
     var startLot: String?
     var container: ContainerVC?
     
-    var arrForecast = [Welcome]()
+    var arrForecast = [WeatherData]()
     var arrDate = [DateModel]()
     
     let date = Date()
@@ -60,7 +60,26 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
                 print(error?.localizedDescription)
                 return
             }
+            
             if let array = weatherData {
+                //            TODO: Fix the HARDCODE
+                var tempTimeInterval: TimeInterval = TimeInterval(weatherData!.first!.list.first!.dt)
+                var resultArray = [[List]]()
+                for weatherDataModel in array {
+                    var oneDayArray = [List]()
+                    for list in weatherDataModel.list {
+                        // temp variables
+                        let currentDate = Date(timeIntervalSince1970: TimeInterval(list.dt))
+                        let previousDate = Date(timeIntervalSince1970: tempTimeInterval)
+                        
+                        if Calendar.current.compare(currentDate, to: previousDate, toGranularity: .day) == .orderedSame {
+                            oneDayArray.append(list)
+                        }else {
+                            resultArray.append(oneDayArray)
+                        }
+                    }
+                }
+                
                 self.arrForecast = array
                 self.tableView.reloadData()
             }
@@ -74,33 +93,42 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
             let strTempMin = String(describing: tempMin)
             let strHumidity = String(describing: humidity)
             let strWindSpeed = String(describing: windSpeed)
-
+            
             self.container?.cityNameLabel.text = weatherData?.first?.city.name
-            self.container?.dateLable.text = weatherData?.first?.list.first?.dtTxt
             self.container?.humidityLabel.text = "\(strHumidity)%"
             self.container?.windSpeedLabel.text = "\(strWindSpeed)m/sec"
             self.container?.degreesLabel.text = "\(strTempMax)/\(strTempMin)"
+            
+            //Formating date
+            let dateFormatter = DateFormatter()
+            
+            dateFormatter.dateFormat = "yyyy-dd-MM HH:mm:ss"
+            let date = dateFormatter.date(from: (weatherData?.first?.list.first?.dtTxt)!)
+            dateFormatter.dateFormat = "E, dd MMMM"
+            let dateStr = dateFormatter.string(from: date!)
+            self.container?.dateLable.text = dateStr
+            
             
             let mainIcon = weatherData?.first?.list.first?.weather.first?.icon
             let mainImgLink = APIConst.baseURLImg + mainIcon! + APIConst.formatImg
             self.container?.mainImage.downloadedFrom(link: mainImgLink)
             
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeStyle = DateFormatter.Style.none
-            dateFormatter .dateStyle = DateFormatter.Style.short
+            //            let dateFormatter = DateFormatter()
+            //            dateFormatter.timeStyle = DateFormatter.Style.none
+            //            dateFormatter .dateStyle = DateFormatter.Style.short
+            //
+            //            for obj in self.arrForecast{
+            //
+            //                for list in obj.list{
+            //                let interval = TimeInterval(list.dt)
+            //                let date = NSDate(timeIntervalSince1970: interval)
+            //                let initDate = dateFormatter.string(from: date as Date)
             
-            for obj in self.arrForecast{
-                
-                for list in obj.list{
-                let interval = TimeInterval(list.dt)
-                let date = NSDate(timeIntervalSince1970: interval)
-                let initDate = dateFormatter.string(from: date as Date)
-
-                    if initDate == {
-                        self.arrDate.append(obj.list)
-                    }
-                }
-            }
+            //                    if initDate == {
+            ////                        self.arrDate.append(obj.list)
+            //                    }
+            //                }
+            //            }
         }
     }
 //                    let currentDateString: String = self.dateFormatter.string(from: date as Date)  // day formate

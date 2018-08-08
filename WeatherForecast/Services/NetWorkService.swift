@@ -16,7 +16,7 @@ class NetWorkManager {
     
     // Get forecast for several days
     
-    func  getForecast(lat: String, lon: String, completion : @escaping ([Welcome]?, Error?) -> Void) {
+    func  getForecast(lat: String, lon: String, completion : @escaping ([WeatherData]?, Error?) -> Void) {
         
         let url = "http://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&type=like&units=metric&APPID=2cb8d05a806591156f036086ee7e727a"
 
@@ -25,7 +25,7 @@ class NetWorkManager {
             switch response.result {
             case .success(_ ):
                 do {
-                    let forecast = try JSONDecoder().decode(Welcome.self, from: response.data!)
+                    let forecast = try JSONDecoder().decode(WeatherData.self, from: response.data!)
                     completion([forecast], nil)
                 }catch let error{
                     print(error)
