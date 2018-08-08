@@ -102,3 +102,25 @@ enum MainEnum: String, Codable {
 struct Wind: Codable {
     let speed, deg: Double
 }
+
+
+//MARK -- CUSTOM MODEL
+
+struct DateModel: Codable {
+    var dtInterval: Int
+    var dtText: String
+    let WeatherFDt : [WeatherFDt]
+    }
+
+struct WeatherFDt : Codable {
+    var temper, minTemp, maxTemp: Double
+    var humidityAir: Int
+    let windData : [WindModel]
+
+}
+
+struct WindModel: Codable {
+    var speedWind: Double
+}
+
+

@@ -20,7 +20,7 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
     var container: ContainerVC?
     
     var arrForecast = [Welcome]()
-    var arrDate = [String]()
+    var arrDate = [DateModel]()
     
     let date = Date()
     let dateFormatter = DateFormatter()
@@ -65,10 +65,6 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
                 self.tableView.reloadData()
             }
             
-            self.container?.cityNameLabel.text = weatherData?.first?.city.name
-            self.container?.dateLable.text = weatherData?.first?.list.first?.dtTxt
-
-            
             guard let humidity = weatherData?.first?.list.first?.main.humidity else {return}
             guard let windSpeed = weatherData?.first?.list.first?.wind.speed else {return}
             guard let tempMax = weatherData?.first?.list.first?.main.tempMax else {return}
@@ -79,6 +75,8 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
             let strHumidity = String(describing: humidity)
             let strWindSpeed = String(describing: windSpeed)
 
+            self.container?.cityNameLabel.text = weatherData?.first?.city.name
+            self.container?.dateLable.text = weatherData?.first?.list.first?.dtTxt
             self.container?.humidityLabel.text = "\(strHumidity)%"
             self.container?.windSpeedLabel.text = "\(strWindSpeed)m/sec"
             self.container?.degreesLabel.text = "\(strTempMax)/\(strTempMin)"
@@ -87,20 +85,25 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
             let mainImgLink = APIConst.baseURLImg + mainIcon! + APIConst.formatImg
             self.container?.mainImage.downloadedFrom(link: mainImgLink)
             
-            var arrayDate = [String]()
-            for dt in self.arrForecast{
-                for listObj in dt.list {
-                    let interval = TimeInterval(listObj.dt)
-                    let date = NSDate(timeIntervalSince1970: interval)
-                    let currentDateString: String = self.dateFormatter.string(from: date as Date)
-                    arrayDate.append(currentDateString)
-                    
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeStyle = DateFormatter.Style.none
+            dateFormatter .dateStyle = DateFormatter.Style.short
+            
+            for obj in self.arrForecast{
+                
+                for list in obj.list{
+                let interval = TimeInterval(list.dt)
+                let date = NSDate(timeIntervalSince1970: interval)
+                let initDate = dateFormatter.string(from: date as Date)
+
+                    if initDate == {
+                        self.arrDate.append(obj.list)
+                    }
                 }
             }
-            self.arrDate = arrayDate.removeDuplicates()
         }
     }
-
+//                    let currentDateString: String = self.dateFormatter.string(from: date as Date)  // day formate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "LoadConteiner") {
@@ -114,13 +117,14 @@ class HomeVC: UIViewController,  CLLocationManagerDelegate, UITableViewDataSourc
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.arrDate.count
+       // return self.arrDate.count
+        return 2 
     }
     
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
-        cell.dtLabel.text = self.arrDate[indexPath.row]
+        //cell.dtLabel.text = self.arrDate[indexPath.row]
         return cell
     }
     

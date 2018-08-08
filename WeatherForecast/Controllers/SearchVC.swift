@@ -17,7 +17,6 @@ class SearchVC: UIViewController {
 
     var selectedPin: MKPlacemark?
     var resultSearchController: UISearchController!
-    
     let locationManager = CLLocationManager()
     
     @IBOutlet weak var mapView: MKMapView!
